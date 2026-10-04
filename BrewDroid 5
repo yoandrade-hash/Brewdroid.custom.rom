@@ -1,0 +1,57 @@
+/dev/block/mtdblock0 /system yaffs2 ro
+/dev/block/mtdblock1 /data yaffs2 nosuid,nodev
+/dev/block/mtdblock2 /cache yaffs2 nosuid,nodevPRODUCT_PACKAGES += \
+    BrewLauncher
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=adb$(call inherit-product, device/brewdroid/lollipop/device.mk)
+
+PRODUCT_NAME := brewdroid_lollipop
+PRODUCT_DEVICE := brewdroid_lollipop
+PRODUCT_BRAND := BrewDroid
+PRODUCT_MODEL := BrewDroid Lollipop
+PRODUCT_MANUFACTURER := BrewDroid
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.brewdroid.version=1.0 \
+    ro.brewdroid.android=5.0 \
+    ro.brewdroid.profile=lollipop \
+    ro.hardware=goldfish \
+    ro.kernel.qemu=1PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/brewdroid_lollipop.mk
+
+COMMON_LUNCH_CHOICES := \
+    brewdroid_lollipop-userdebugLOCAL_PATH := $(call my-dir)
+
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a
+TARGET_CPU_VARIANT := cortex-a9
+
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+BOARD_KERNEL_CMDLINE := \
+    console=ttyAMA0 \
+    androidboot.hardware=goldfish
+
+TARGET_USERIMAGES_USE_EXT4 := true
+
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x01000000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x40000000
+BOARD_CACHEIMAGE_PARTITION_SIZE := 0x10000000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x80000000
+
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4brewdroid_lollipop-userdebugdevice/brewdroid/lollipop/
+├── AndroidProducts.mk
+├── BoardConfig.mk
+├── device.mk
+├── brewdroid_lollipop.mk
+├── rootdir/
+│   └── etc/
+│       └── fstab.goldfish
+└── README.md
