@@ -34,3 +34,13 @@ brewdroid.custom.rom/
 ├── lg/
 ├── oneplus/
 └── generic/
+BrewDroid Modern
+├── x86_64
+├── QEMU / Ranchu
+├── kernel
+├── ramdisk
+├── boot.img
+├── system.img
+├── userdata.img
+├── vendor.img
+└── ADB
