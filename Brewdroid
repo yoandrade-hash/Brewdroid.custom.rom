@@ -1,0 +1,36 @@
+brewdroid.custom.rom/
+├── build/
+├── device/
+│   └── brewdroid/
+│       ├── common/
+│       │   ├── BoardConfigCommon.mk
+│       │   ├── device-common.mk
+│       │   └── rootdir/
+│       ├── emulator/
+│       └── generic/
+├── vendor/
+│   └── brewdroid/
+│       ├── common/
+│       └── emulator/
+├── kernel/
+│   └── README.md
+├── partitions/
+│   ├── generic_emulator/
+│   └── README.md
+├── packages/
+│   └── apps/
+│       └── BrewLauncher/
+├── recovery/
+├── system/
+├── boot/
+├── userdata/
+├── cache/
+└── README.mddevice/
+├── samsung/
+├── motorola/
+├── xiaomi/
+├── huawei/
+├── sony/
+├── lg/
+├── oneplus/
+└── generic/
