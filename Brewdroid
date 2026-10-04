@@ -26,7 +26,21 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 
 BOARD_KERNEL_CMDLINE := \
-    console=ttyS0 \
+    console=ttyS0 \AOSP
+├── build/
+├── system/
+├── frameworks/
+├── device/
+├── kernel/
+├── vendor/
+└── BrewDroid
+        ↓
+     compilación
+        ↓
+boot.img
+system.img
+vendor.img
+userdata.img
     androidboot.hardware=ranchu \
     androidboot.selinux=permissive
 
