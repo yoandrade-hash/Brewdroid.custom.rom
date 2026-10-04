@@ -1,39 +1,93 @@
-brewdroid.custom.rom/
-├── build/
-├── device/
-│   └── brewdroid/
-│       ├── common/
-│       │   ├── BoardConfigCommon.mk
-│       │   ├── device-common.mk
-│       │   └── rootdir/
-│       ├── emulator/
-│       └── generic/
-├── vendor/
-│   └── brewdroid/
-│       ├── common/
-│       └── emulator/
-├── kernel/
-│   └── README.md
-├── partitions/
-│   ├── generic_emulator/
-│   └── README.md
-├── packages/
-│   └── apps/
-│       └── BrewLauncher/
-├── recovery/
-├── system/
-├── boot/
-├── userdata/
-├── cache/
-└── README.mddevice/
-├── samsung/
-├── motorola/
-├── xiaomi/
-├── huawei/
-├── sony/
-├── lg/
-├── oneplus/
-└── generic/
+LOCAL_PATH := $(call my-dir)
+
+TARGET_ARCH := x86_64
+TARGET_ARCH_VARIANT := x86-64
+TARGET_CPU_VARIANT := generic
+
+TARGET_2ND_ARCH := x86
+TARGET_2ND_ARCH_VARIANT := x86
+TARGET_2ND_CPU_VARIANT := generic
+
+TARGET_USES_64_BIT_BINDER := true
+
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+TARGET_USERIMAGES_USE_EXT4 := true
+
+BOARD_FLASH_BLOCK_SIZE := 4096
+
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
+BOARD_VENDORIMAGE_PARTITION_SIZE := 536870912
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 4294967296
+
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+
+BOARD_KERNEL_CMDLINE := \
+    console=ttyS0 \
+    androidboot.hardware=ranchu \
+    androidboot.selinux=permissive
+
+TARGET_KERNEL_CONFIG := brewdroid_x86_64_defconfigBrewDroid Modern
+├── x86_64
+├── QEMU / Ranchu
+├── kernel
+├── ramdisk
+├── boot.img
+├── system.img
+├── userdata.img
+├── vendor.img
+└── ADBBrewDroid-Universal/
+├── Android-Emulator/
+│   └── x86_64/
+├── AEmulator/
+│   └── x86_64/
+├── Virtual-Master/
+│   └── arm64/
+├── QEMU/
+│   └── x86_64/
+├── VirtualBox/
+│   └── x86_64/
+└── VMware/
+    └── x86_64/$(call inherit-product, device/brewdroid/modern/device.mk)
+
+PRODUCT_NAME := brewdroid_modern
+PRODUCT_DEVICE := brewdroid_modern
+PRODUCT_BRAND := BrewDroid
+PRODUCT_MODEL := BrewDroid Modern
+PRODUCT_MANUFACTURER := BrewDroid
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.brewdroid.version=2.0 \
+    ro.brewdroid.profile=modern \
+    ro.brewdroid.arch=x86_64 \
+    ro.brewdroid.vm=truePRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/brewdroid_modern.mk
+
+COMMON_LUNCH_CHOICES := \
+    brewdroid_modern-userdebugdevice/brewdroid/modern/
+├── AndroidProducts.mk
+├── brewdroid_modern.mk
+├── BoardConfig.mk
+├── device.mk
+├── init/
+│   └── init.brewdroid.rc
+├── overlay/
+├── rootdir/
+│   └── etc/
+│       └── fstab.brewdroid
+└── README.mdon early-init
+    setprop ro.brewdroid.boot true
+
+on boot
+    setprop sys.usb.config adb
+
+on property:sys.boot_completed=1
+    setprop ro.brewdroid.ready 1/dev/block/by-name/system  /system  ext4  ro,barrier=1  wait
+/dev/block/by-name/vendor  /vendor  ext4  ro,barrier=1  wait
+/dev/block/by-name/userdata /data  ext4  nosuid,nodev,noatime  wait,check
 BrewDroid Modern
 ├── x86_64
 ├── QEMU / Ranchu
